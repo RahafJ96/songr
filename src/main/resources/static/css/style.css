@@ -1,0 +1,29 @@
+body {
+background-color : black ;
+color : red;
+}
+
+.albums{
+width : 100% ;
+
+}
+p{
+    width : 100%;
+}
+.album{
+    width: 30%;
+    height : 100% ;
+    float : left;
+    margin-right : 40px;
+}
+
+.album img {
+   width : 100%
+}
+h1{
+    text-align : center;
+}
+.home-img{
+width : 1000px;
+height : 1000px;
+}
