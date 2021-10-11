@@ -1,5 +1,6 @@
-package com.songr.songr;
+package com.songr.songr.controller;
 
+import com.songr.songr.model.Album;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,22 +23,22 @@ public class MainController {
     }
 
     Album albums[] = {
-            new Album("sehert allail",
-                    "George wassouf" ,
+            new Album("Minefields",
+                    "John Legend & Faouzia" ,
                     15 ,
-                    1500 , "https://layalina.awicdn.com/site-images/sites/default/files/prod/article/180918/%D8%B5%D9%88%D8%B1%D8%A9-%D8%AC%D9%88%D8%B1%D8%AC-%D9%88%D8%B3%D9%88%D9%81-%D8%A7%D9%84%D8%AA%D9%8A-%D8%A3%D8%AB%D8%A7%D8%B1%D8%AA-%D8%A7%D8%B3%D8%AA%D8%BA%D8%B1%D8%A7%D8%A8-%D8%AC%D9%85%D9%87%D9%88%D8%B1%D9%87-1348334.gif?preset=v4.0_770X577&save-png=1&rnd=0519151220214-OLD&animation=1")
+                    1500 , "https://i1.sndcdn.com/artworks-lsKMQmWxQ9O4agYL-33Fe1Q-t500x500.jpg")
             ,
-            new Album("Love of my life"
-                    , "Queen",
+            new Album("Hurt"
+                    , "Christina Aguilera",
                     26 ,
                     15002 ,
-                    "https://www.nme.com/wp-content/uploads/2020/03/queen-bohemianrhapsody-2000x1270-1-696x442.jpg")
+                    "https://upload.wikimedia.org/wikipedia/en/7/77/Christina_Aguilera_-_Hurt_%28single%29.png")
             ,
-            new Album("Hello World"
-                    , "Mohammed Mohiesen" ,
+            new Album("All I Ask"
+                    , "Adele" ,
                     10 ,
                     2600 ,
-                    "https://www.rollingstone.com/wp-content/uploads/2018/06/rs-13220-johnnycash-624-1383147488.jpg?resize=1800,1200&w=1200"        )
+                    "https://i1.sndcdn.com/artworks-000440501640-fbzxgs-t500x500.jpg")
     };
 
     @GetMapping("/albums")
