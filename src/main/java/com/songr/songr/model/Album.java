@@ -1,6 +1,21 @@
 package com.songr.songr.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+
+@Entity
 public class Album {
+    @id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    private Long id;
+
+    public Long getID(){
+        return id;
+    }
     private String title;
     private String artist;
     private int songCount;
