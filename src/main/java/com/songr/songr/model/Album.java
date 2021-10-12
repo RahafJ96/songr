@@ -6,6 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
+import java.util.List;
+
 @Entity
 public class Album {
     //@id
@@ -77,5 +79,8 @@ public class Album {
 
     public Long getId() {
         return id;
+    }
+
+    public List<Object> findById(Integer id) {
     }
 }
