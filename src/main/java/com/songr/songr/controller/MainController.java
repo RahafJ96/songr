@@ -16,9 +16,6 @@ import org.springframework.web.servlet.view.RedirectView;
 @Controller
 public class MainController {
 
-    @Autowired
-    private AlbumPackage albumPackage;
-
     // http://localhost:8080/hello
     @GetMapping("/hello")
     String getGreeting(@RequestParam(name="name", required = false, defaultValue = "World") String name , Model userName) {
@@ -71,7 +68,7 @@ public class MainController {
                                  @RequestParam(value="length") long length,
                                  @RequestParam(value="imageUrl") String imageUrl){
         Album album = new Album(title,artist,songCount,length,imageUrl);
-        albumPackage.save(album);
+ //       albumPackage.save(album);
         return  new RedirectView("/albums");
     }
 }
