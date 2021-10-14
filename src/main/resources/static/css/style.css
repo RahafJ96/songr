@@ -1,20 +1,24 @@
 body {
-background-color : black ;
-color : red;
+background-color: #F6F6F6;
+color : #747291;
 }
 
 .albums{
-width : 100% ;
+    width : 100% ;
+    margin-left : 50px;
 
 }
 p{
     width : 100%;
 }
 .album{
+    text-align : center;
+    background-color: #FFF0F0;
     width: 30%;
     height : 100% ;
     float : left;
-    margin-right : 40px;
+    margin-right : 30px;
+
 }
 
 .album img {
@@ -22,8 +26,47 @@ p{
 }
 h1{
     text-align : center;
+    font-size: 40px;
 }
 .home-img{
 width : 1000px;
 height : 1000px;
+}
+
+h1 {
+    color: pink;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: pink;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #111;
+}
+
+img{
+    height:250px;
+    width:250px;
+
+}
+.album{
+    margin-left:40%;
+
 }

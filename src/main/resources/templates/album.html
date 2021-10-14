@@ -3,18 +3,44 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+
     <title>Album</title>
 </head>
 <body>
+<main><div class="navbar" >
+
+    <ul class="nav navbar-nav">
+        <li>
+            <a class="navbar-brand" href="/">Home Page</a>
+        </li>
+        <li>
+            <a class="navbar-brand" href="/hello">Hello Page</a>
+        </li>
+        <li>
+            <a href="/capitalize/hello" >Capitalize</a>
+        </li>
+        <li>
+            <a href="/getalbums" >Albums</a>
+        </li>
+        <li>
+            <a href="/albums" >Add your Album</a>
+        </li>
+        <li>
+            <a href="/existAlbums" >view Existing Album</a>
+        </li>
+    </ul>
+
+
+</div>
+</main>
 <h1>Albums</h1>
-<div class="albums" th:each="album : ${album}">
-    <div class="album">
-        <p>Album Title: <span th:text=${album.title}></span> </p>
-        <p>Album Artist: <span th:text=${album.artist}></span></p>
-        <p>Songs Count: <span th:text=${album.songCount}></span></p>
-        <p>Album Length: <span th:text=${album.length}></span></p>
-        <img th:src=${album.imageUrl} src="">
+<div th:each="album:${album}" class="album">
+    <img th:src="@{${album.imageUrl}}"/>
+    <p th:text="'Title:  '+'   '+${album.title}"></p>
+    <p th:text="${'artist:  '+'  '+album.artist}"></p>
+    <p th:text="${'songCount:  '+'  '+album.songCount}"></p>
+    <p th:text="'sec:  '+'   '+${album.length}"></p>
     </div>
 </div>
 
