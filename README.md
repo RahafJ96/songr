@@ -9,3 +9,10 @@
 - `/hello` req params `(name = "Hello is default")`
 - `/Capitalize` followed by /Whatever to capitalize .
 - `/Albums` will show you random 3 generated albums .
+
+## Usage
+
+- To use the Capitalize page you can write whatever you want in the url, as shown:
+    - `http://localhost:8080/capitalize/name` anything you want here
+- Create a form to add an album
+- To use the Albums page just fill in all the data in the form and add an album in the list.

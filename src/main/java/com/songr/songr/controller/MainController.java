@@ -13,6 +13,7 @@ import java.util.ArrayList;
 @Controller
 public class MainController {
 
+
     @Autowired
     private AlbumRepo albumRepo;
 
@@ -23,6 +24,7 @@ public class MainController {
     }
 
     // http://localhost:8080/capitalize/hello
+    // http://localhost:8080/hello/capitalize/name=rahaf
     @GetMapping("/capitalize/{word}")
     public String showCapital(Model m, @PathVariable("word") String word){
         m.addAttribute("word", word);
@@ -53,6 +55,7 @@ public class MainController {
     }
 
     // read from database on the same page
+    // http://localhost:8080/albums
     @GetMapping("/albums")
     String getAlbum(Model model) {
         model.addAttribute("album" , albumRepo.findAll());
@@ -63,5 +66,21 @@ public class MainController {
     public String getExistAlbum(Model model){
         model.addAttribute("album",albumRepo.findAll());
         return "album";
+    }
+
+    @PostMapping("/addAlbum")
+    public String getAddAlbum(){
+        return "addAlbum.html";
+    }
+
+    @PostMapping("/albums")
+    public RedirectView addAlbum(@RequestParam(value = "title") String title,
+                                 @RequestParam(value= "artist") String artist,
+                                 @RequestParam(value="songCount") int songCount,
+                                 @RequestParam(value="length") long length,
+                                 @RequestParam(value="imageUrl") String imageUrl){
+        Album album = new Album(title,artist,songCount,length,imageUrl);
+ //       albumPackage.save(album);
+        return  new RedirectView("/albums");
     }
 }

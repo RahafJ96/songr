@@ -75,4 +75,6 @@ public class Album {
     public String getImageUrl() {
         return imageUrl;
     }
+
+
 }
