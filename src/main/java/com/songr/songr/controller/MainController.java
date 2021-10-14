@@ -1,49 +1,67 @@
 package com.songr.songr.controller;
 
 import com.songr.songr.model.Album;
+import com.songr.songr.model.AlbumRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.servlet.view.RedirectView;
+
+import java.util.ArrayList;
 
 @Controller
 public class MainController {
 
+    @Autowired
+    private AlbumRepo albumRepo;
+
+    // http://localhost:8080/hello
     @GetMapping("/hello")
-    String getGreeting(@RequestParam(name="name", required = false, defaultValue = "World") String name , Model userName) {
-        userName.addAttribute("name" , name);
-        return "welcome";
+    public String helloWorld(){
+        return "hello";
     }
 
+    // http://localhost:8080/capitalize/hello
     @GetMapping("/capitalize/{word}")
     public String showCapital(Model m, @PathVariable("word") String word){
         m.addAttribute("word", word);
         return "capital";
     }
 
-    Album albums[] = {
-            new Album("Minefields",
-                    "John Legend & Faouzia" ,
-                    15 ,
-                    1500 , "https://i1.sndcdn.com/artworks-lsKMQmWxQ9O4agYL-33Fe1Q-t500x500.jpg")
-            ,
-            new Album("Hurt"
-                    , "Christina Aguilera",
-                    26 ,
-                    15002 ,
-                    "https://upload.wikimedia.org/wikipedia/en/7/77/Christina_Aguilera_-_Hurt_%28single%29.png")
-            ,
-            new Album("All I Ask"
-                    , "Adele" ,
-                    10 ,
-                    2600 ,
-                    "https://i1.sndcdn.com/artworks-000440501640-fbzxgs-t500x500.jpg")
-    };
+    @GetMapping("/getalbums")
+    public String albums(Model model){
+        ArrayList<Album> albums= new ArrayList<>();
 
+        Album Song01 = new Album("Minefields","John Legend & Faouzia",25,10,"https://i1.sndcdn.com/artworks-lsKMQmWxQ9O4agYL-33Fe1Q-t500x500.jpg");
+        Album Song02 = new Album("Hurt","Christina Aguilera",15,150,"https://i1.sndcdn.com/artworks-lsKMQmWxQ9O4agYL-33Fe1Q-t500x500.jpg");
+        Album Song03 = new Album("All I Ask","Adele",41,205,"https://i1.sndcdn.com/artworks-000440501640-fbzxgs-t500x500.jpg");
+
+        albums.add(Song01);
+        albums.add(Song02);
+        albums.add(Song03);
+
+        model.addAttribute("album",albums);
+        return "album";
+    }
+
+    // Add to database
+    @PostMapping("/albums")
+    public RedirectView createNewAlbum(@ModelAttribute Album album){
+        albumRepo.save(album);
+        return new RedirectView("addAlbum");
+    }
+
+    // read from database on the same page
     @GetMapping("/albums")
-    String getAlbum(Model album) {
-        album.addAttribute("album" , albums);
-        return "albums";
+    String getAlbum(Model model) {
+        model.addAttribute("album" , albumRepo.findAll());
+        return "addAlbum";
+    }
+
+    @GetMapping("/existAlbums")
+    public String getExistAlbum(Model model){
+        model.addAttribute("album",albumRepo.findAll());
+        return "album";
     }
 }
