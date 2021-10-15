@@ -1,10 +1,21 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link rel="stylesheet" href="../static/css/style.css">
     <meta charset="UTF-8">
     <title>Welcome Page</title>
 </head>
 <body>
+<div class="navbar" >
+    <ul class="nav navbar-nav">
+        <li> <a class="navbar-brand" href="/">Home Page</a> </li>
+        <li><a class="navbar-brand" href="/hello">Hello Page</a></li>
+        <li> <a href="/capitalize/hello" >Capitalize</a></li>
+        <li> <a href="/getalbums" >Albums</a> </li>
+        <li><a href="/albums" >Add your Album</a></li>
+        <li><a href="/existAlbums" >view Existing Album</a> </li>
+    </ul>
+</div>
 <h1>Welcome to the home Page</h1>
 <p th:text="'Hello  ' + ${name} + '!'">Hello </p>
 </body>
