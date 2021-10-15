@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="navbar" >
+
+  <ul class="nav navbar-nav">
+    <li>
+      <a class="navbar-brand" href="/">Home Page</a>
+    </li>
+    <li>
+      <a class="navbar-brand" href="/hello">Hello Page</a>
+    </li>
+    <li>
+      <a href="/capitalize/hello" >Capitalize</a>
+    </li>
+    <li>
+      <a href="/getalbums" >Albums</a>
+    </li>
+    <li>
+      <a href="/albums" >Add your Album</a>
+    </li>
+    <li>
+      <a href="/existAlbums" >view Existing Album</a>
+    </li>
+  </ul>
+
+
+</div>
+
+<div class="albums">
+  <tr th:each="Albums: ${album}">
+    <td th:text="${Albums.title}"></td>
+    <br>
+    <td th:text="${Albums.artist}"></td>
+    <br>
+    <td th:text="${Albums.songCount}"></td>
+    <br>
+    <td th:text="${Albums.length}"></td>
+    <br>
+    <img th:src="${Albums.imageURL}"  src="image"/>
+    <br>
+
+  </tr>
+</div>
+
+</body>
+</html>

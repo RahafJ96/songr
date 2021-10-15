@@ -1,7 +1,9 @@
 package com.songr.songr.controller;
 
-import com.songr.songr.model.Album;
-import com.songr.songr.model.AlbumRepo;
+import com.songr.songr.model.Albums;
+import com.songr.songr.model.Song;
+import com.songr.songr.repository.AlbumRepo;
+import com.songr.songr.repository.SongRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -9,78 +11,83 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class MainController {
 
 
     @Autowired
-    private AlbumRepo albumRepo;
+    AlbumRepo albumRepo;
+
+    @Autowired
+    SongRepo songRepo;
 
     // http://localhost:8080/hello
     @GetMapping("/hello")
-    public String helloWorld(){
-        return "hello";
+    public String helloWorld(@RequestParam(name="name", required = false, defaultValue = "World")String name, Model model){
+        model.addAttribute("name", name);
+        return "welcome";
     }
 
-    // http://localhost:8080/capitalize/hello
-    // http://localhost:8080/hello/capitalize/name=rahaf
     @GetMapping("/capitalize/{word}")
-    public String showCapital(Model m, @PathVariable("word") String word){
-        m.addAttribute("word", word);
+    public String showCapital(@PathVariable String word, Model model){
+        model.addAttribute("word",word.toUpperCase());
         return "capital";
     }
 
-    @GetMapping("/getalbums")
+    @GetMapping("/getAllalbums")
     public String albums(Model model){
-        ArrayList<Album> albums= new ArrayList<>();
+        ArrayList<Albums> albums= new ArrayList<>();
 
-        Album Song01 = new Album("Minefields","John Legend & Faouzia",25,10,"https://i1.sndcdn.com/artworks-lsKMQmWxQ9O4agYL-33Fe1Q-t500x500.jpg");
-        Album Song02 = new Album("Hurt","Christina Aguilera",15,150,"https://i1.sndcdn.com/artworks-lsKMQmWxQ9O4agYL-33Fe1Q-t500x500.jpg");
-        Album Song03 = new Album("All I Ask","Adele",41,205,"https://i1.sndcdn.com/artworks-000440501640-fbzxgs-t500x500.jpg");
+        Albums Song01 = new Albums("Minefields","John Legend & Faouzia",25,10,"https://i1.sndcdn.com/artworks-lsKMQmWxQ9O4agYL-33Fe1Q-t500x500.jpg");
+        Albums Song02 = new Albums("Hurt","Christina Aguilera",15,150,"https://i1.sndcdn.com/artworks-lsKMQmWxQ9O4agYL-33Fe1Q-t500x500.jpg");
+        Albums Song03 = new Albums("All I Ask","Adele",41,205,"https://i1.sndcdn.com/artworks-000440501640-fbzxgs-t500x500.jpg");
 
         albums.add(Song01);
         albums.add(Song02);
         albums.add(Song03);
 
         model.addAttribute("album",albums);
-        return "album";
+        return "staticAlbum";
     }
 
     // Add to database
     @PostMapping("/albums")
-    public RedirectView createNewAlbum(@ModelAttribute Album album){
-        albumRepo.save(album);
-        return new RedirectView("addAlbum");
+    public RedirectView createNewAlbum(@ModelAttribute Albums albums){
+        albumRepo.save(albums);
+        return new RedirectView("/albums");
     }
 
     // read from database on the same page
-    // http://localhost:8080/albums
     @GetMapping("/albums")
-    String getAlbum(Model model) {
-        model.addAttribute("album" , albumRepo.findAll());
-        return "addAlbum";
+    String getAllAlbums(Model model) {
+        model.addAttribute("albums" , albumRepo.findAll());
+        return "newAlbums";
     }
 
-    @GetMapping("/existAlbums")
-    public String getExistAlbum(Model model){
-        model.addAttribute("album",albumRepo.findAll());
-        return "album";
+    @GetMapping("/songs")
+    public String getSongs(Model model){
+        List<Song> songs= songRepo.findAll();
+        model.addAttribute("song",songs);
+        return "songs";
+    }
+    @GetMapping("/addSong")
+    public String Form(){
+        return "addSong";
     }
 
-    @PostMapping("/addAlbum")
-    public String getAddAlbum(){
-        return "addAlbum.html";
-    }
+    @PostMapping("/songs")
+    public RedirectView addAlbum(@RequestParam(value = "albumID") Long albums_id,Model song,
+                                 @RequestParam(value= "title") String title,
+                                 @RequestParam(value="length") int length,
+                                 @RequestParam(value="trackNumber") int trackNumber){
+        Albums albums = albumRepo.findById(albums_id).get();
+        Song songs = new Song(albums,title,length,trackNumber);
+        songRepo.save(songs);
+        Albums albums1 = albumRepo.findById(albums.getId()).get();
+        song.addAttribute("song", albums1.getSongs());
 
-    @PostMapping("/albums")
-    public RedirectView addAlbum(@RequestParam(value = "title") String title,
-                                 @RequestParam(value= "artist") String artist,
-                                 @RequestParam(value="songCount") int songCount,
-                                 @RequestParam(value="length") long length,
-                                 @RequestParam(value="imageUrl") String imageUrl){
-        Album album = new Album(title,artist,songCount,length,imageUrl);
-        albumPackage.save(album);
-        return  new RedirectView("/albums");
+        return new RedirectView("/songs");
     }
 }

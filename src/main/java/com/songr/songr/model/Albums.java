@@ -2,9 +2,10 @@ package com.songr.songr.model;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-public class Album {
+public class Albums {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -13,10 +14,12 @@ public class Album {
     private String title;
     private String artist;
     private int songCount;
-    private long length;
-    private String imageUrl;
+    private int length;
+    private String imageURL;
 
-    public Album() {
+    @OneToMany(mappedBy = "albums", cascade = CascadeType.ALL)
+    private List<Song> songs;
+    public Albums() {
 
     }
 
@@ -28,12 +31,20 @@ public class Album {
         this.id = id;
     }
 
-    public Album(String title, String artist, int songCount, long length, String imageUrl) {
+    public Albums(String title, String artist, int songCount, int length, String imageURL) {
         this.title = title;
         this.artist = artist;
         this.songCount = songCount;
         this.length = length;
-        this.imageUrl = imageUrl;
+        this.imageURL = imageURL;
+    }
+
+    public List<Song> getSongs() {
+        return songs;
+    }
+
+    public void setSongs(List<Song> songs) {
+        this.songs = songs;
     }
 
     public void setTitle(String title) {
@@ -48,12 +59,12 @@ public class Album {
         this.songCount = songCount;
     }
 
-    public void setLength(long length) {
+    public void setLength(int length) {
         this.length = length;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImageURL(String imageUrl) {
+        this.imageURL = imageUrl;
     }
 
     public String getTitle() {
@@ -72,8 +83,8 @@ public class Album {
         return length;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getImageURL() {
+        return imageURL;
     }
 
 
