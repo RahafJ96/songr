@@ -80,7 +80,7 @@ public class MainController {
                                  @RequestParam(value="length") long length,
                                  @RequestParam(value="imageUrl") String imageUrl){
         Album album = new Album(title,artist,songCount,length,imageUrl);
- //       albumPackage.save(album);
+        albumPackage.save(album);
         return  new RedirectView("/albums");
     }
 }

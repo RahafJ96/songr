@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<html lang="en">
 <head>
     <meta charset="UTF-8">
-
-
-    <title>Album</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <title>Albums</title>
 </head>
+
 <body>
-<main><div class="navbar" >
+<main>
+    <div class="navbar" >
 
     <ul class="nav navbar-nav">
         <li>
@@ -33,16 +33,50 @@
 
 
 </div>
-</main>
+
+
 <h1>Albums</h1>
-<div th:each="album:${album}" class="album">
-    <img th:src="@{${album.imageUrl}}"/>
-    <p th:text="'Title:  '+'   '+${album.title}"></p>
-    <p th:text="${'artist:  '+'  '+album.artist}"></p>
-    <p th:text="${'songCount:  '+'  '+album.songCount}"></p>
-    <p th:text="'sec:  '+'   '+${album.length}"></p>
+    <div>
+    <form action="/getAllAlbums" method="post">
+        <label>Title</label>
+        <input type="text" name="title" />
+        <br/>
+        <label>Artist</label>
+        <input type="text" name="artist" />
+        <br/>
+
+        <label>Image URL</label>
+        <input type="text" name="songCount" />
+        <br/>
+
+        <label>Length</label>
+        <input type="number" name="length" />
+        <br/>
+
+        <label>Songs Count</label>
+        <input type="number" name="ImageURL" />
+        <br/>
+
+        <input type="submit" value="submit">
+    </form>
+        </div>
+
+    <div class="albums">
+
+        <tr th:each="Albums: ${albums}">
+            <td th:text="${Album.title}"></td>
+            <br>
+            <td th:text="${Album.artist}"></td>
+            <br>
+            <td th:text="${Album.songCount}"></td>
+            <br>
+            <td th:text="${Album.length}"></td>
+            <br>
+            <img th:src="${Album.imageURL}"  src="image"/>
+            <br>
+        </tr>
     </div>
 </div>
-
+</main>
 </body>
 </html>
