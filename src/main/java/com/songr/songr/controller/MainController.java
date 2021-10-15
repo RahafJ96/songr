@@ -23,16 +23,16 @@ public class MainController {
     @Autowired
     SongRepo songRepo;
 
-    // http://localhost:8080/hello
     @GetMapping("/hello")
-    public String helloWorld(@RequestParam(name="name", required = false, defaultValue = "World")String name, Model model){
+    public String hello(@RequestParam(name="name", required = false, defaultValue = "World")String name, Model model){
         model.addAttribute("name", name);
-        return "welcome";
+        return "hello";
     }
 
     @GetMapping("/capitalize/{word}")
-    public String showCapital(@PathVariable String word, Model model){
-        model.addAttribute("word",word.toUpperCase());
+    public String capitalizer(@PathVariable String word, Model model){
+        //     String capital= Capitalizer.wordCapital(word);
+ //       model.addAttribute("word",capital);
         return "capital";
     }
 
@@ -41,7 +41,7 @@ public class MainController {
         ArrayList<Albums> albums= new ArrayList<>();
 
         Albums Song01 = new Albums("Minefields","John Legend & Faouzia",25,10,"https://i1.sndcdn.com/artworks-lsKMQmWxQ9O4agYL-33Fe1Q-t500x500.jpg");
-        Albums Song02 = new Albums("Hurt","Christina Aguilera",15,150,"https://i1.sndcdn.com/artworks-lsKMQmWxQ9O4agYL-33Fe1Q-t500x500.jpg");
+        Albums Song02 = new Albums("Hurt","Christina Aguilera",15,150,"https://i1.sndcdn.com/artworks-000035118287-bkwzyc-t500x500.jpg");
         Albums Song03 = new Albums("All I Ask","Adele",41,205,"https://i1.sndcdn.com/artworks-000440501640-fbzxgs-t500x500.jpg");
 
         albums.add(Song01);
@@ -49,7 +49,7 @@ public class MainController {
         albums.add(Song03);
 
         model.addAttribute("album",albums);
-        return "staticAlbum";
+        return "albums";
     }
 
     // Add to database
