@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Capital</title>
+    <title>Title</title>
 </head>
 <body>
 <div class="navbar" >
@@ -31,6 +30,22 @@
 
 
 </div>
-<p style="text-transform: uppercase" th:text=${word} ></p>
+
+<div class="albums">
+    <tr th:each="song: ${song}">
+        <td th:text="${song.id}"></td>
+        <br>
+        <td th:text="${song.title}"></td>
+        <br>
+        <td th:text="${song.length}" />
+        <br>
+        <td th:text="${song.trackNumber}"></td>
+        <br>
+
+
+    </tr>
+</div>
+
+
 </body>
 </html>

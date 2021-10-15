@@ -64,15 +64,15 @@
     <div class="albums">
 
         <tr th:each="Albums: ${albums}">
-            <td th:text="${Album.title}"></td>
+            <td th:text="${Albums.title}"></td>
             <br>
-            <td th:text="${Album.artist}"></td>
+            <td th:text="${Albums.artist}"></td>
             <br>
-            <td th:text="${Album.songCount}"></td>
+            <td th:text="${Albums.songCount}"></td>
             <br>
-            <td th:text="${Album.length}"></td>
+            <td th:text="${Albums.length}"></td>
             <br>
-            <img th:src="${Album.imageURL}"  src="image"/>
+            <img th:src="${Albums.imageURL}"  src="image"/>
             <br>
         </tr>
     </div>

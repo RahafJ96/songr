@@ -1,6 +1,6 @@
 package com.songr.songr;
 
-import com.songr.songr.model.Album;
+import com.songr.songr.model.Albums;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -15,7 +15,7 @@ class DemoApplicationTests {
 
 	@Test
 	void testConstructor() {
-		Album album = new Album("Title","Artist",10,120,"http://assets.stickpng.com/thumbs/60394f92b6264f0004079c19.png");
+		Albums album = new Albums("Title","Artist",10,120,"http://assets.stickpng.com/thumbs/60394f92b6264f0004079c19.png");
 		album.setTitle("Title");
 		assertEquals("Title",album.getTitle());
 		album.setArtist("Artist");

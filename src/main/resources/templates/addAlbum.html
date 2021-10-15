@@ -5,6 +5,63 @@
     <title>Title</title>
 </head>
 <body>
+<div class="navbar" >
 
+    <ul class="nav navbar-nav">
+        <li>
+            <a class="navbar-brand" href="/">Home Page</a>
+        </li>
+        <li>
+            <a class="navbar-brand" href="/hello">Hello Page</a>
+        </li>
+        <li>
+            <a href="/capitalize/hello" >Capitalize</a>
+        </li>
+        <li>
+            <a href="/getalbums" >Albums</a>
+        </li>
+        <li>
+            <a href="/albums" >Add your Album</a>
+        </li>
+        <li>
+            <a href="/existAlbums" >view Existing Album</a>
+        </li>
+    </ul>
+
+
+</div>
+<form action="/albums" method="post">
+    <label>Title</label>
+    <input type="text" name="title" />
+
+    <label>Artist</label>
+    <input type="text" name="artist" />
+    <label>Song Count</label>
+    <input type="number" name="songCount" />
+
+    <label>Length</label>
+    <input type="number" name="length" />
+
+    <label>Image URL</label>
+    <input type="text" name="ImageURL" />
+
+    <input type="submit" value="submit">
+</form>
+
+<div class="albums">
+    <tr th:each="Albums: ${albums}">
+        <td th:text="${Albums.getTitle()}"></td>
+        <br>
+        <td th:text="${Albums.getArtist()}"></td>
+
+        <td th:text="${Albums.getSongCount()}"></td>
+        <br>
+        <td th:text="${Albums.getLength()}"></td>
+        <br>
+        <img th:src="${Albums.getImageURL()}"  src="image"/>
+        <br>
+
+    </tr>
+</div>
 </body>
 </html>
