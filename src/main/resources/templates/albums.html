@@ -7,41 +7,61 @@
 </head>
 
 <body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-center">
+  <div class="container">
 
-<form action="/getAllAlbums" method="post">
-  <label>Title</label>
-  <input type="text" name="title" />
+    <ul class="nav nav-pills nav-justified">
+      <li class="nav-item">
+        <a class="navbar-brand" href="/">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="navbar-brand" href="/hello">Welcome Page</a>
+      </li>
+      <li class="nav-item">
+        <a class="navbar-brand" href="/capitalize/hello" >Capitalize</a>
+      </li>
+      <li class="nav-item">
+        <a class="navbar-brand" href="/addAlbum" >Add Album</a>
+      </li>
+      <li class="nav-item">
+        <a class="navbar-brand" href="/albums" >Albums</a>
+      </li>
+      <li class="nav-item">
+        <a class="navbar-brand" href="/songs" >Songs</a>
+      </li>
+      <li class="nav-item">
+        <a class="navbar-brand" href="/userInfo" >User Info</a>
+      </li>
 
-  <label>Artist</label>
-  <input type="text" name="artist" />
+    </ul>
+  </div>
+</nav>
+<div class="container">
+  <div class="row mt-5">
+    <div class="col">
+      <h1 class="h1 mb-5 text-center">Albums Available</h1>
+    </div>
+  </div>
 
-  <label>Image URL</label>
-  <input type="text" name="songCount" />
+  <div class="row" >
+    <div class="col text-center d-flex justify-content-center" th:each="album : ${album}">
+      <div class="card" style="width: 18rem;">
+        <img th:src="${albums.imageURL}" class="card-img-top" alt="album image">
 
-  <label>Length</label>
-  <input type="number" name="length" />
+        <div class="card-body">
+          <h5 class="card-title" th:text="${albums.title}"></h5>
+          <div class="card-text">
+            <p th:text="'Artist : '+${albums.artist}"></p>
+            <p th:text="'Songs Count : '+${albums.songCount}"></p>
+            <p th:text="'Length : '+${albums.length}+' Seconds'"></p>
+          </div>
 
-  <label>Songs Count</label>
-  <input type="number" name="ImageURL" />
-
-  <input type="submit" value="submit">
-</form>
-
-<div class="albums">
-  <tr th:each="Albums: ${albums}">
-    <td th:text="${Albums.title}"></td>
-    <br>
-    <td th:text="${Albums.artist}"></td>
-    <br>
-    <td th:text="${Albums.songCount}"></td>
-    <br>
-    <td th:text="${Albums.length}"></td>
-    <br>
-    <img th:src="${Albums.imageURL}"  src="image"/>
-    <br>
-
-  </tr>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
 
 </body>
 </html>

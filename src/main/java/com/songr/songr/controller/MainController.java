@@ -1,18 +1,18 @@
 package com.songr.songr.controller;
 
+import com.songr.songr.model.SongCC;
 import com.songr.songr.model.Albums;
 import com.songr.songr.model.Song;
 import com.songr.songr.repository.AlbumRepo;
 import com.songr.songr.repository.SongRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 
 @Controller
 public class MainController {
@@ -58,36 +58,41 @@ public class MainController {
         albumRepo.save(albums);
         return new RedirectView("/albums");
     }
+    @GetMapping("/userInfo")
+    public String userInfo(@RequestHeader MultiValueMap<String,String> headers, Model model){
+        headers.forEach((key,value) -> System.out.println(String.format("Header '%s' = %s", key, String.join("|", value))));
+        model.addAttribute("headerData",headers.get("user-agent"));
+        return "userInfo";
+    }
 
     // read from database on the same page
-    @GetMapping("/albums")
-    String getAllAlbums(Model model) {
-        model.addAttribute("albums" , albumRepo.findAll());
-        return "newAlbums";
+    //@GetMapping("/albums")
+    @GetMapping("addAlbum")
+    String addAlbum() {
+        return "addAlbum";
+    }
+    @PostMapping("/albums")
+    public RedirectView addAlbums(Albums album){
+        System.out.println(album);
+        albumRepo.save(album);
+        return new RedirectView("/albums");
     }
 
     @GetMapping("/songs")
-    public String getSongs(Model model){
-        List<Song> songs= songRepo.findAll();
-        model.addAttribute("song",songs);
+    public String getSong(Model model){
+       model.addAttribute("songs",songRepo.findAll());
         return "songs";
     }
-    @GetMapping("/addSong")
-    public String Form(){
-        return "addSong";
-    }
+//    @GetMapping("/addSong")
+//    public String Form(){
+//        return "addSong";
+//    }
 
     @PostMapping("/songs")
-    public RedirectView addAlbum(@RequestParam(value = "albumID") Long albums_id,Model song,
-                                 @RequestParam(value= "title") String title,
-                                 @RequestParam(value="length") int length,
-                                 @RequestParam(value="trackNumber") int trackNumber){
-        Albums albums = albumRepo.findById(albums_id).get();
-        Song songs = new Song(albums,title,length,trackNumber);
-        songRepo.save(songs);
-        Albums albums1 = albumRepo.findById(albums.getId()).get();
-        song.addAttribute("song", albums1.getSongs());
-
-        return new RedirectView("/songs");
+    public RedirectView addSong(SongCC song){
+        Albums newAlbum = albumRepo.findByTitle(song.getAlbum());
+        Song newSong = new Song(newAlbum,song.getTitle(),song.getLength());
+        songRepo.save(newSong);
+        return new RedirectView("/albums");
     }
 }
