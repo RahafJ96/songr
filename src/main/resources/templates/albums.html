@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <title>Albums</title>
@@ -8,46 +8,40 @@
 
 <body>
 
-<div class="container">
-  <div class="row mt-5">
-    <div class="col">
-      <h1 class="h1 mb-5 text-center">Albums Available</h1>
-    </div>
-  </div>
+<form action="/getAllAlbums" method="post">
+  <label>Title</label>
+  <input type="text" name="title" />
 
-  <div class="row my-5 d-flex justify-content-center">
-    <div class="col-6">
-      <div class="row">
-        <button id="rahaf" class="btn btn-primary">Add Your Album Or Song</button>
-      </div>
-    </div>
-  </div>
+  <label>Artist</label>
+  <input type="text" name="artist" />
 
-  <div class="row" >
-    <div class="col text-center d-flex justify-content-center" th:each="album : ${albumss}">
-      <div class="card" style="width: 18rem;">
-        <img th:src="${album.imageUrl}" class="card-img-top" alt="album image">
+  <label>Image URL</label>
+  <input type="text" name="songCount" />
 
-        <div class="card-body">
-          <h5 class="card-title" th:text="${album.title}"></h5>
-          <div class="card-text">
-            <p th:text="'Artist : '+${album.artist}"></p>
-            <p th:text="'Songs Count : '+${album.songCount}"></p>
-            <p th:text="'Length : '+${album.length}+' Seconds'"></p>
-          </div>
+  <label>Length</label>
+  <input type="number" name="length" />
 
-        </div>
-      </div>
-    </div>
-  </div>
+  <label>Songs Count</label>
+  <input type="number" name="ImageURL" />
+
+  <input type="submit" value="submit">
+</form>
+
+<div class="albums">
+  <tr th:each="Albums: ${albums}">
+    <td th:text="${Albums.title}"></td>
+    <br>
+    <td th:text="${Albums.artist}"></td>
+    <br>
+    <td th:text="${Albums.songCount}"></td>
+    <br>
+    <td th:text="${Albums.length}"></td>
+    <br>
+    <img th:src="${Albums.imageURL}"  src="image"/>
+    <br>
+
+  </tr>
 </div>
-
-<script>
-  buttonElement = document.getElementById("rahaf")
-  buttonElement.addEventListener("click",()=>{
-    window.location.href = "/addalbum"
-  })
-</script>
 
 </body>
 </html>
