@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AlbumRepo extends JpaRepository<Albums,Long> {
+    Albums findByTitle(String title);
 }
