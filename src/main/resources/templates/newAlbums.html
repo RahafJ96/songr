@@ -35,9 +35,11 @@
 </div>
 
 
+
+
 <h1>Albums</h1>
     <div>
-    <form action="/getAllAlbums" method="post">
+    <form action="/albums" method="post">
         <label>Title</label>
         <input type="text" name="title" />
         <br/>
@@ -64,15 +66,15 @@
     <div class="albums">
 
         <tr th:each="Albums: ${albums}">
-            <td th:text="${Albums.title}"></td>
+            <td th:text="${Albums.getTitle()}"></td>
             <br>
-            <td th:text="${Albums.artist}"></td>
+            <td th:text="${Albums.getArtist()}"></td>
             <br>
-            <td th:text="${Albums.songCount}"></td>
+            <td th:text="${Albums.getSongCount()}"></td>
             <br>
-            <td th:text="${Albums.length}"></td>
+            <td th:text="${Albums.getLength()}"></td>
             <br>
-            <img th:src="${Albums.imageURL}"  src="image"/>
+            <img th:src="${Albums.getImageURL()}"  src="image"/>
             <br>
         </tr>
     </div>

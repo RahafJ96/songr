@@ -12,6 +12,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 @Controller
 public class MainController {
@@ -30,18 +31,17 @@ public class MainController {
     }
 
     @GetMapping("/capitalize/{word}")
-    public String capitalizer(@PathVariable String word, Model model){
-        //     String capital= Capitalizer.wordCapital(word);
- //       model.addAttribute("word",capital);
+    public String toUpperCase(@PathVariable String word, Model model){
+        model.addAttribute("word",word.toUpperCase());
         return "capital";
     }
 
-    @GetMapping("/getAllalbums")
+    @GetMapping("/getAllAlbums")
     public String albums(Model model){
         ArrayList<Albums> albums= new ArrayList<>();
 
         Albums Song01 = new Albums("Minefields","John Legend & Faouzia",25,10,"https://i1.sndcdn.com/artworks-lsKMQmWxQ9O4agYL-33Fe1Q-t500x500.jpg");
-        Albums Song02 = new Albums("Hurt","Christina Aguilera",15,150,"https://i1.sndcdn.com/artworks-000035118287-bkwzyc-t500x500.jpg");
+        Albums Song02 = new Albums("Hurt","Christina Aguilera",15,150,"https://images-na.ssl-images-amazon.com/images/I/71uhWKE4EOL._SL1500_.jpg");
         Albums Song03 = new Albums("All I Ask","Adele",41,205,"https://i1.sndcdn.com/artworks-000440501640-fbzxgs-t500x500.jpg");
 
         albums.add(Song01);
@@ -49,7 +49,7 @@ public class MainController {
         albums.add(Song03);
 
         model.addAttribute("album",albums);
-        return "albums";
+        return "allAlbums";
     }
 
     // Add to database
