@@ -12,20 +12,21 @@ public class Song {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "albums_id",nullable = false)
+    @JoinColumn(name = "albums_id")
     private Albums albums;
     private String title;
     private int length;
-    private Long trackNumber;
+    private int trackNumber;
 
 
     public Song() {
     }
 
-    public Song(Albums albums, String title, int length) {
+    public Song(Albums albums, String title, int length,int trackNumber) {
         this.albums = albums;
         this.title = title;
         this.length = length;
+        this.trackNumber=trackNumber;
     }
 
     public Albums getAlbums() {
@@ -52,11 +53,11 @@ public class Song {
         this.length = length;
     }
 
-    public Long getTrackNumber() {
+    public int getTrackNumber() {
         return trackNumber;
     }
 
-    public void setTrackNumber(Long trackNumber) {
+    public void setTrackNumber(int trackNumber) {
         this.trackNumber = trackNumber;
     }
 
