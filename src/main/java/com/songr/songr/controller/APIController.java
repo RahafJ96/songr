@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 
-@CrossOrigin(origins = "*",allowedHeaders = "*")
-@RestController
+//@CrossOrigin(origins = "*",allowedHeaders = "*")
+//@RestController
 public class APIController {
-
-    @GetMapping("/number/{integer}")
-    public String numbersAPI(@PathVariable Integer integer) throws IOException{
-        return NumbersAPI.apiCaller(integer);
-    }
+//
+//    @GetMapping("/number/{integer}")
+//    public String numbersAPI(@PathVariable Integer integer) throws IOException{
+//        return NumbersAPI.apiCaller(integer);
+//    }
 }
