@@ -23,7 +23,7 @@
                 <a class="navbar-brand" href="/addAlbum" >Add Album</a>
             </li>
             <li class="nav-item">
-                <a class="navbar-brand" href="/albums" >Albums</a>
+                <a class="navbar-brand" href="/getAllAlbums" >All Albums</a>
             </li>
             <li class="nav-item">
                 <a class="navbar-brand" href="/songs" >Songs</a>
@@ -35,21 +35,45 @@
         </ul>
     </div>
 </nav>
-<div class="albums">
-    <tr th:each="Albums: ${album}">
-        <td th:text="${Albums.title}"></td>
-        <br>
-        <td th:text="${Albums.artist}"></td>
-        <br>
-        <td th:text="${Albums.songCount}"></td>
-        <br>
-        <td th:text="${Albums.length}"></td>
-        <br>
-        <img th:src="${Albums.imageURL}"  src="image"/>
-        <br>
+<div class="container">
+    <div class="row mt-5">
+        <div class="col">
+            <h1 class="h1 mb-5 text-center">Available Albums</h1>
+        </div>
+    </div>
 
-    </tr>
+    <div class="row my-5 d-flex justify-content-center">
+        <div class="col-6">
+            <div class="row">
+                <button id="addtheSong" class="btn btn-primary">Add Your Album Or Song</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" >
+        <div class="col text-center d-flex justify-content-center" th:each="Album : ${album}">
+            <div class="card" style="width: 18rem;">
+                <img th:src="${Album.imageURL}" class="card-img-top" alt="album image">
+
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${Album.title}"></h5>
+                    <div class="card-text">
+                        <p th:text="'Artist : '+${Album.artist}"></p>
+                        <p th:text="'Songs Count : '+${Album.songCount}"></p>
+                        <p th:text="'Length : '+${Album.length}+' Seconds'"></p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<script>
+    buttonElement = document.getElementById("addtheSong")
+    buttonElement.addEventListener("click",()=>{
+        window.location.href = "/addAlbum"
+    })
+</script>
 
 </body>
 </html>
