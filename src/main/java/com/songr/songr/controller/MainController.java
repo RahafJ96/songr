@@ -53,10 +53,13 @@ public class MainController {
     }
 
     // Add to database
+    @ResponseBody
     @PostMapping("/albums")
-    public RedirectView createNewAlbum(@ModelAttribute Albums albums){
-        albumRepo.save(albums);
-        return new RedirectView("/albums");
+    public Albums createNewAlbum(@RequestBody Albums albums){
+        //albumRepo.save(albums);
+        //return new RedirectView("/albums");
+        Albums newAlbums = albumRepo.save(albums);
+        return newAlbums;
     }
     @GetMapping("/userInfo")
     public String userInfo(@RequestHeader MultiValueMap<String,String> headers, Model model){
@@ -71,12 +74,12 @@ public class MainController {
     String addAlbum() {
         return "addAlbum";
     }
-    @PostMapping("/albums")
-    public RedirectView addAlbums(Albums album){
-        System.out.println(album);
-        albumRepo.save(album);
-        return new RedirectView("/albums");
-    }
+//    @PostMapping("/albums")
+//    public RedirectView addAlbums(Albums album){
+//        System.out.println(album);
+//        albumRepo.save(album);
+//        return new RedirectView("/albums");
+//    }
 
     @GetMapping("/songs")
     public String getSong(Model model){
