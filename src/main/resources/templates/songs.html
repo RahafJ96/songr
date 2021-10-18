@@ -19,14 +19,17 @@
             <li class="nav-item">
                 <a class="navbar-brand" href="/capitalize/hello" >Capitalize</a>
             </li>
+            <!--        <li class="nav-item">-->
+            <!--          <a class="navbar-brand" href="/addAlbum" >Add Album</a>-->
+            <!--        </li>-->
             <li class="nav-item">
-                <a class="navbar-brand" href="/addAlbum" >Add Album</a>
-            </li>
-            <li class="nav-item">
-                <a class="navbar-brand" href="/albums" >Albums</a>
+                <a class="navbar-brand" href="/getAllAlbums" >All Albums</a>
             </li>
             <li class="nav-item">
                 <a class="navbar-brand" href="/songs" >Songs</a>
+            </li>
+            <li class="nav-item">
+                <a class="navbar-brand" href="/addSong" >Add Songs</a>
             </li>
             <li class="nav-item">
                 <a class="navbar-brand" href="/userInfo" >User Info</a>
@@ -42,23 +45,18 @@
             <h1 class="h1">All Songs</h1>
         </div>
 
-        <div class="row">
-            <div class="col text-center d-flex justify-content-center" th:each="song : ${songs}">
-                <div class="card" style="width: 18rem;">
-                    <img th:src="${song.albums.imageURL}" class="card-img-top" alt="album image">
-
-                    <div class="card-body">
-                        <h5 class="card-title" th:text="${song.title}"></h5>
-                        <div class="card-text">
-                            <p th:text="'Album : '+${song.albums.title}"></p>
-                            <p th:text="'Length : '+${song.length}+' Seconds'"></p>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
+        <div class="albums">
+            <tr th:each="song: ${song}">
+                <td th:text="${song.id}"></td>
+                <br>
+                <td th:text="${song.title}"></td>
+                <br>
+                <td th:text="${song.length}" />
+                <br>
+                <td th:text="${song.trackNumber}"></td>
+                <br>
+            </tr>
         </div>
-
     </div>
 
 </div>

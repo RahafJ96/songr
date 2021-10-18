@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:action="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="UTF-8">
   <title>Albums</title>
@@ -20,14 +20,17 @@
       <li class="nav-item">
         <a class="navbar-brand" href="/capitalize/hello" >Capitalize</a>
       </li>
-      <li class="nav-item">
-        <a class="navbar-brand" href="/addAlbum" >Add Album</a>
-      </li>
+      <!--        <li class="nav-item">-->
+      <!--          <a class="navbar-brand" href="/addAlbum" >Add Album</a>-->
+      <!--        </li>-->
       <li class="nav-item">
         <a class="navbar-brand" href="/getAllAlbums" >All Albums</a>
       </li>
       <li class="nav-item">
         <a class="navbar-brand" href="/songs" >Songs</a>
+      </li>
+      <li class="nav-item">
+        <a class="navbar-brand" href="/addSong" >Add Songs</a>
       </li>
       <li class="nav-item">
         <a class="navbar-brand" href="/userInfo" >User Info</a>
@@ -43,23 +46,37 @@
     </div>
   </div>
 
-  <div class="row" >
-    <div class="col text-center d-flex justify-content-center" th:each="album : ${album}">
-      <div class="card" style="width: 18rem;">
-        <img th:src="${albums.imageURL}" class="card-img-top" alt="album image">
+      <form action="/getAllAlbums" method="post">
+        <labal>Title</labal>
+        <input type="text" name="title"/>
+        <br/>
+        <labal>Artist</labal>
+        <input type="text" name="artist"/>
+        <br/>
+        <labal>Image URL</labal>
+        <input type="text" name="imageURL"/>
+        <br/>
+        <labal>Song Counts</labal>
+        <input type="text" name="songCount"/>
+        <br/>
+        <input type="submit" value="submit">
+      </form>
 
-        <div class="card-body">
-          <h5 class="card-title" th:text="${albums.title}"></h5>
-          <div class="card-text">
-            <p th:text="'Artist : '+${albums.artist}"></p>
-            <p th:text="'Songs Count : '+${albums.songCount}"></p>
-            <p th:text="'Length : '+${albums.length}+' Seconds'"></p>
-          </div>
+</div>
+<div class="albums">
+  <tr th:each="Albums: ${albums}">
+    <td th:text="${Albums.title}"></td>
+    <br>
+    <td th:text="${Albums.artist}"></td>
+    <br>
+    <td th:text="${Albums.songCount}"></td>
+    <br>
+    <td th:text="${Albums.length}"></td>
+    <br>
+    <img th:src="${Albums.imageURL}"  src="image"/>
+    <br>
 
-        </div>
-      </div>
-    </div>
-  </div>
+  </tr>
 </div>
 
 
