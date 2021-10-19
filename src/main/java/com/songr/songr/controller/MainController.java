@@ -66,7 +66,7 @@ public class MainController {
     @GetMapping("/albums")
     public String getAllAlbums(Model model){
         model.addAttribute("albums",albumRepo.findAll());
-        return "newAlbums";
+        return "albums";
     }
     @GetMapping("/userInfo")
     public String userInfo(@RequestHeader MultiValueMap<String,String> headers, Model model){
@@ -74,19 +74,6 @@ public class MainController {
         model.addAttribute("headerData",headers.get("user-agent"));
         return "userInfo";
     }
-
-    // read from database on the same page
-    //@GetMapping("/albums")
-//    @GetMapping("addAlbum")
-//    String addAlbum() {
-//        return "addAlbum";
-//    }
-//    @PostMapping("/albums")
-//    public RedirectView addAlbums(Albums album){
-//        System.out.println(album);
-//        albumRepo.save(album);
-//        return new RedirectView("/albums");
-//    }
 
     @GetMapping("/songs")
     public String getSongs(Model song){
@@ -104,6 +91,11 @@ public class MainController {
                                 @RequestParam (value = "title")String title,
                                 @RequestParam (value = "length")int length,
                                 @RequestParam (value = "trackNumber")int trackNumber){
+        System.out.println("albumID = "+ albums_id);
+        System.out.println("title = "+ title);
+        System.out.println("length = "+ length);
+        System.out.println("trackNumber = "+ trackNumber);
+        System.out.println("====================================================");
         Albums albums = albumRepo.findById(albums_id).get();
         Song songs = new Song(albums,title,length,trackNumber);
         songRepo.save(songs);

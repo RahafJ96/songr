@@ -19,9 +19,6 @@
             <li class="nav-item">
                 <a class="navbar-brand" href="/capitalize/hello" >Capitalize</a>
             </li>
-            <!--        <li class="nav-item">-->
-            <!--          <a class="navbar-brand" href="/addAlbum" >Add Album</a>-->
-            <!--        </li>-->
             <li class="nav-item">
                 <a class="navbar-brand" href="/getAllAlbums" >All Albums</a>
             </li>
@@ -45,7 +42,7 @@
             <h1 class="h1">All Songs</h1>
         </div>
 
-        <div class="albums">
+        <div class="songs">
             <tr th:each="song: ${song}">
                 <td th:text="${song.id}"></td>
                 <br>
