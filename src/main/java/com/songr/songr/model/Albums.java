@@ -17,8 +17,8 @@ public class Albums {
     private int length;
     private String imageURL;
 
-    @OneToMany(mappedBy = "albums",cascade = CascadeType.ALL)
-    private List<Song> songs;
+    @OneToMany
+    private List<Song> songList;
     public Albums() {
 
     }
@@ -40,11 +40,11 @@ public class Albums {
     }
 
     public List<Song> getSongs() {
-        return songs;
+        return songList;
     }
 
     public void setSong(List<Song> songs) {
-        this.songs = songs;
+        this.songList = songList;
     }
 
     public void setTitle(String title) {
@@ -63,8 +63,8 @@ public class Albums {
         this.length = length;
     }
 
-    public void setImageURL(String imageUrl) {
-        this.imageURL = imageUrl;
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
     }
 
     public String getTitle() {
