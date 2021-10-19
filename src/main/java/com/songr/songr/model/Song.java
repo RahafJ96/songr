@@ -1,40 +1,37 @@
 package com.songr.songr.model;
 
-//import org.springframework.data.jpa.repository.JpaRepository;
-
 import javax.persistence.*;
+
 
 @Entity
 public class Song {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private Long id;
+    @Column(name = "track_number", nullable = false)
+    private Long trackNumber;
 
-    @ManyToOne
-    @JoinColumn(name = "albums_id")
-    private Albums albums;
     private String title;
     private int length;
-    private int trackNumber;
 
+    @ManyToOne
+    @JoinColumn(name = "album_id", nullable = false)
+    private Albums albums;
 
     public Song() {
     }
 
-    public Song(Albums albums, String title, int length,int trackNumber) {
-        this.albums = albums;
+    public Song(String title, int length, Albums albums) {
         this.title = title;
         this.length = length;
-        this.trackNumber=trackNumber;
-    }
-
-    public Albums getAlbums() {
-        return albums;
-    }
-
-    public void setAlbums(Albums albums) {
         this.albums = albums;
+    }
+
+    public Long getTrackNumber() {
+        return trackNumber;
+    }
+
+    public void setTrackNumber(Long trackNumber) {
+        this.trackNumber = trackNumber;
     }
 
     public String getTitle() {
@@ -53,21 +50,11 @@ public class Song {
         this.length = length;
     }
 
-    public int getTrackNumber() {
-        return trackNumber;
+    public Albums getAlbums() {
+        return albums;
     }
 
-    public void setTrackNumber(int trackNumber) {
-        this.trackNumber = trackNumber;
+    public void setAlbums(Albums albums) {
+        this.albums = albums;
     }
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
 }
